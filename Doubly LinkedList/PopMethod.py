@@ -55,6 +55,7 @@ class DoublyLinkedList():
             if current_node.value == val:
                 return True
             current_node = current_node.next
+    
 
     def get(self, index):
         if index <0 or index>= self.length:
@@ -67,11 +68,64 @@ class DoublyLinkedList():
             current_node = self.tail
             for _ in range(self.length -1, index, -1):
                 current_node = current_node.prev
-        return current_node.value
+        return current_node
     
-    def set(self, index, value):
-        pass
+    def set_value(self, index, value):
+        node = self.get(index)
+        if node:
+            node.value = value
+            return True
+        return False
+     
+    def insert(self, index, value):
+        new_node = Node(value)
+        if self.length ==0:
+            self.head = new_node
+            self.tail = new_node
+            self.length = 1
+            return
+        if index<0 and index>=self.length:
+            return None
+        if index == 0:
+            self.prepend(value)
+        elif index == self.length-1:
+            self.append(value)
+        else:
+            prev_node = None
+            current_node = self.head
+            for i in range(index):
+                prev_node = current_node
+                current_node =current_node.next
+            prev_node.next = new_node
+            new_node.prev = prev_node
+            new_node.next = current_node
+            current_node.prev = new_node
+        self.length += 1
 
+    def popFirst(self):
+        if self.length ==1:
+            self.head = None
+            self.tail = None
+        else:
+            popped_node = self.head
+            self.head = popped_node.next
+            self.head.prev = None
+            popped_node.next = None
+        self.length -=1
+        return popped_node
+    
+    def popMethod(self):
+        if self.length ==0:
+            return None
+        if self.length ==1:
+            self.head = None
+            self.tail = None
+        else:
+            propped_node = self.tail
+            self.tail = self.tail.prev
+            self.tail.next = None
+            propped_node.prev = None
+        self.length -= 1
 
     def __str__(self):
         if self.length == 0:
@@ -90,9 +144,13 @@ newDLL.append(20)
 newDLL.append(30)
 newDLL.append(40)
 newDLL.prepend(90)
-print(newDLL)
+print(newDLL.traverse())
+newDLL.reverseTraverse()
 print(newDLL.search(100))
-print(newDLL.get(1))
+newDLL.set_value(0,100)
+newDLL.insert(2,90)
+newDLL.popFirst()
+print(newDLL)
     
 
 
