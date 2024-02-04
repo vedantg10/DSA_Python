@@ -92,12 +92,60 @@ class DoublyCircularLinekdList():
                     break
                 current_node = current_node.next
     
+    def deleteNode(self, location):
+        if self.head is None:
+            print('There is not any node to delete')
+        else:
+            if location ==0:
+                if self.head == self.tail:
+                    self.head.prev = None
+                    self.head.next = None
+                    self.head = None
+                    self.tail = None
+                else:
+                    self.head.next.prev = self.tail
+                    self.tail.next = self.head.next
+                    self.head = self.head.next
+            elif location == 1:
+                if self.head == self.tail:
+                    self.head.prev = None
+                    self.head.next =None
+                    self.head = None
+                    self.tail = None
+                else:
+                    self.tail = self.tail.prev
+                    self.tail.next = self.head
+                    self.head.prev = self.tail
+            else:
+                curNode = self.head
+                index= 0
+                while index<location-1:
+                    curNode = curNode.next
+                    index +=1
+                curNode.next = curNode.next.next
+                curNode.next.prev = curNode
+    
+    def deleteCDLL(self):
+        if self.head is None:
+            print("There is not any element to delete")
+        else:
+            self.tail.next = None
+            tempNode = self.head
+            while tempNode:
+                tempNode.prev = None
+                tempNode = tempNode.next
+            self.head = None
+            self.tail = None
+            print("The CDLL has been successfully deleted")
+
+    
 circularDLL = DoublyCircularLinekdList()
 print(circularDLL.createCDLL(5))
 circularDLL.insertCDLL(0,0)
 circularDLL.insertCDLL(1,1)
 circularDLL.insertCDLL(2,2)
 print([node.value for node in circularDLL])
-circularDLL.traversalCDLL()
-circularDLL.reverseTraversalCDLL()
-print(circularDLL.search(5))
+circularDLL.deleteNode(0)
+print([node.value for node in circularDLL])
+circularDLL.deleteNode(2)
+print([node.value for node in circularDLL])
