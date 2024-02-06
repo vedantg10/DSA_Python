@@ -20,3 +20,10 @@ def intersection(llA, llB):
         longerNode = longerNode.next
     
     return longerNode
+
+def addSameNode(llA, llB, value):
+    temp_node = Node(value)
+    llA.tail.next = temp_node
+    llA.tail = temp_node
+    llB.tail.next = temp_node
+    llB.tail = temp_node
