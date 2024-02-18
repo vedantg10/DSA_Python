@@ -1,46 +1,21 @@
 import QueueUsingLinkedList as queue
-class TreeNode:
+
+class Tree:
     def __init__(self, data):
-        self.data = data
+        self.data =data
         self.leftChild = None
         self.rightChild = None
-    
 
-newBT = TreeNode("Drinks")
-leftChild = TreeNode("Hot")
-rightChild = TreeNode("Cold")
+
+newBT = Tree("Drinks")
+leftChild = Tree("Cold")
+rightChild = Tree("Hot")
 newBT.leftChild = leftChild
 newBT.rightChild = rightChild
 
-def preOrderTraversal(rootNode):
-    if not rootNode:
-        return
-    print(rootNode.data)
-    preOrderTraversal(rootNode.leftChild)
-    preOrderTraversal(rootNode.rightChild)
-
-
-preOrderTraversal(newBT)
-
-def inOrderTraversal(rootNode):
-    if not rootNode:
-        return
-    inOrderTraversal(rootNode.leftChild)
-    print(rootNode.data)
-    inOrderTraversal(rootNode.rightChild)
-
-inOrderTraversal(newBT)
-
-def postOrderTraversal(rootNode):
-    if not rootNode:
-        return
-    postOrderTraversal(rootNode.leftChild)
-    postOrderTraversal(rootNode.rightChild)
-    print(rootNode.data)
-
 
 def levelOrderTraversal(rootNode):
-    if not rootNode:
+    if rootNode is None:
         return
     else:
         customQueue = queue.Queue()
@@ -52,7 +27,6 @@ def levelOrderTraversal(rootNode):
                 customQueue.enqueue(root.value.leftChild)
             if(root.value.rightChild is not None):
                 customQueue.enqueue(root.value.rightChild)
-
 
 
 def getDeepestNode(rootNode):
@@ -95,9 +69,9 @@ def deleteDeepestNode(rootNode, dNode):
                     return
                 else:
                     customQueue.enqueue(root.value.leftChild)
-        return "Failed to delete"
 
-def deleteNodeBT(rootNode, node):
+
+def deleteNode(rootNode, node):
     if not rootNode:
         return "The BT does not exist"
     else:
@@ -110,8 +84,18 @@ def deleteNodeBT(rootNode, node):
                 root.value.data = dNode.data
                 deleteDeepestNode(rootNode, dNode)
                 return "The node has been successfully deleted"
-            if (root.value.leftChild is not None):
+            if(root.value.leftChild is not None):
                 customQueue.enqueue(root.value.leftChild)
-            if (root.value.rightChild is not None):
+
+            if(root.value.rightChild is not None):
                 customQueue.enqueue(root.value.rightChild)
+        return "Failed to delete"
+
+
+deepestNode = getDeepestNode(newBT)
+deleteDeepestNode(newBT, newBT)
+levelOrderTraversal(newBT)
+
+
+
 
