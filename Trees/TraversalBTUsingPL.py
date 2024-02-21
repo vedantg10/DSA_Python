@@ -47,7 +47,6 @@ class BinaryTree():
             return
         print(self.customList[index])
         self.levelOrderTraversal(index+1)
-       
 
 
 newBT = BinaryTree(8)

@@ -70,6 +70,18 @@ class LinkedList:
             popped_node.next = None
         self.length -= 1
         return popped_node 
+    
+    def pop(self):
+        if self.length ==1:
+            self.tail =None
+            self.head = None
+        else:
+            temp = self.head
+            while (temp.next is not self.tail):
+                temp = temp.next
+            self.tail = temp
+            self.tail.next = None
+        self.length -=1
 
 
     def __str__(self):
