@@ -83,6 +83,23 @@ class LinkedList:
             self.tail.next = None
         self.length -=1
 
+    
+    def remove(self, index):
+        if index>= self.length or index<0:
+            return None
+        if index ==0:
+            return self.pop_first
+        elif index == self.length:
+            return self.pop
+        else:
+            prev_node = self.get(index-1)
+            popped_node = prev_node.next
+            prev_node.next = popped_node.next
+            popped_node.next = None
+        self.length -=1
+        return popped_node
+
+
 
     def __str__(self):
         temp_node = self.head
